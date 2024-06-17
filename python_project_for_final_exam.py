@@ -5,6 +5,7 @@ import numpy as np
 import time
 import math
 import random
+import datetime
 Events = [i for i in dir(cv) if 'EVENT' in i]
 
 #偵測按鍵
@@ -652,7 +653,8 @@ def main():
 
         blend_bool = input("Blend with last image? (y/n):")
         if blend_bool == 'y':
-            tempimg2 = tempimg.copy() 
+            tempimg2 = tempimg.copy()
+            cv.imwrite("blend_temp"+datetime.datetime.now().strftime("%Y%m%d%H%M%S")+".png", tempimg2)
             tempimg = blend(img1, tempimg)
             img1 = tempimg2.copy()
             cv.imshow("processed image", tempimg)
@@ -664,7 +666,8 @@ def main():
 
         blend_bool = input("Reverse blend with last image? (y/n):")
         if blend_bool == 'y':
-            tempimg2 = tempimg.copy() 
+            tempimg2 = tempimg.copy()
+            cv.imwrite("blend_temp"+datetime.datetime.now().strftime("%Y%m%d%H%M%S")+".png", tempimg2)
             tempimg = blend(tempimg, img1)
             img1 = tempimg2.copy()
             cv.imshow("processed image", tempimg)
@@ -696,7 +699,7 @@ def main():
 
     #輸出結果到同一個資料夾
 
-    cv.imwrite("output.png", img1)
+    cv.imwrite("output"+datetime.datetime.now().strftime("%Y%m%d%H%M%S")+".png", img1)
     print("Saved image as 'output.png'")
     print()
     print("System will close in 5 seconds...")
